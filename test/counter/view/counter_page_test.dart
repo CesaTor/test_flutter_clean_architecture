@@ -1,67 +1,27 @@
-import 'package:bloc_test/bloc_test.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:fomo/counter/counter.dart';
-import 'package:mocktail/mocktail.dart';
-
-import '../../helpers/helpers.dart';
-
-class MockCounterCubit extends MockCubit<int> implements CounterCubit {}
+import 'package:fomo/app/app.dart';
 
 void main() {
-  group('CounterPage', () {
-    testWidgets('renders CounterView', (tester) async {
-      await tester.pumpApp(const CounterPage());
-      expect(find.byType(CounterView), findsOneWidget);
-    });
-  });
+  testWidgets('CounterPage', (tester) async {
+    // Build our app and trigger a frame.
+    await tester.pumpWidget(
+      const ProviderScope(
+        child: App(),
+      ),
+    );
 
-  group('CounterView', () {
-    late CounterCubit counterCubit;
+    // Verify that our counter starts at 0.
+    expect(find.text('0'), findsOneWidget);
+    expect(find.text('1'), findsNothing);
 
-    setUp(() {
-      counterCubit = MockCounterCubit();
-    });
+    // Tap the '+' icon and trigger a frame.
+    await tester.tap(find.byIcon(Icons.add));
+    await tester.pump();
 
-    testWidgets('renders current count', (tester) async {
-      const state = 42;
-      when(() => counterCubit.state).thenReturn(state);
-      await tester.pumpApp(
-        BlocProvider.value(
-          value: counterCubit,
-          child: const CounterView(),
-        ),
-      );
-      expect(find.text('$state'), findsOneWidget);
-    });
-
-    testWidgets('calls increment when increment button is tapped',
-        (tester) async {
-      when(() => counterCubit.state).thenReturn(0);
-      when(() => counterCubit.increment()).thenReturn(null);
-      await tester.pumpApp(
-        BlocProvider.value(
-          value: counterCubit,
-          child: const CounterView(),
-        ),
-      );
-      await tester.tap(find.byIcon(Icons.add));
-      verify(() => counterCubit.increment()).called(1);
-    });
-
-    testWidgets('calls decrement when decrement button is tapped',
-        (tester) async {
-      when(() => counterCubit.state).thenReturn(0);
-      when(() => counterCubit.decrement()).thenReturn(null);
-      await tester.pumpApp(
-        BlocProvider.value(
-          value: counterCubit,
-          child: const CounterView(),
-        ),
-      );
-      await tester.tap(find.byIcon(Icons.remove));
-      verify(() => counterCubit.decrement()).called(1);
-    });
+    // Verify that our counter has incremented.
+    expect(find.text('0'), findsNothing);
+    expect(find.text('1'), findsOneWidget);
   });
 }

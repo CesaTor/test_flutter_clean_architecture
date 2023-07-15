@@ -15,7 +15,7 @@ class AppPodObserver extends ProviderObserver {
     ProviderContainer container,
   ) {
     super.didUpdateProvider(provider, previousValue, newValue, container);
-    log('onChange(${provider.runtimeType}, $previousValue, $newValue)');
+    log('onChange(${provider.name}, $previousValue, $newValue)');
   }
 
   @override
@@ -25,7 +25,7 @@ class AppPodObserver extends ProviderObserver {
     ProviderContainer container,
   ) {
     super.didAddProvider(provider, value, container);
-    log('onInit(${provider.runtimeType}, $value)');
+    log('onInit(${provider.name}, $value)');
   }
 
   @override
@@ -34,7 +34,7 @@ class AppPodObserver extends ProviderObserver {
     ProviderContainer container,
   ) {
     super.didDisposeProvider(provider, container);
-    log('onDispose(${provider.runtimeType})');
+    log('onDispose(${provider.name})');
   }
 
   // @override

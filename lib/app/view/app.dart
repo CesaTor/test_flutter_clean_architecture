@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:fomo/counter/counter.dart';
+import 'package:fomo/feature/counter/counter.dart';
 import 'package:fomo/l10n/l10n.dart';
 
 class App extends StatelessWidget {

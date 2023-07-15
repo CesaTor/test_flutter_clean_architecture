@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:fomo/counter/counter.dart';
+import 'package:fomo/feature/counter/counter.dart';
 import 'package:fomo/l10n/l10n.dart';
 
 class CounterPage extends ConsumerWidget {

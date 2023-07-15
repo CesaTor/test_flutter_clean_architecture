@@ -1,0 +1,6 @@
+# global_options:
+#   freezed:freezed:
+#     runs_before:
+#       - freezed:freezed
+#       - isar_generator:isar_generator
+#       - chopper_generator:chopper_generator

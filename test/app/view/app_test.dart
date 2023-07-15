@@ -1,7 +1,7 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
 import 'package:fomo/app/app.dart';
-import 'package:fomo/counter/counter.dart';
+import 'package:fomo/feature/counter/counter.dart';
 
 void main() {
   group('App', () {

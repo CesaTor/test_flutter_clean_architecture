@@ -1,6 +1,6 @@
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter_test/flutter_test.dart';
-import 'package:fomo/counter/provider/counter_provider.dart';
+import 'package:fomo/feature/counter/presentation/state/counter_provider.dart';
 import 'package:mocktail/mocktail.dart';
 
 // Using mockito to keep track of when a provider notify its listeners

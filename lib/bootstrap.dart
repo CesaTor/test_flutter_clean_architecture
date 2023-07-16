@@ -3,6 +3,7 @@ import 'dart:developer';
 
 import 'package:flutter/widgets.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:fomo/feature/show_posts/dependencies.dart';
 
 class AppPodObserver extends ProviderObserver {
   const AppPodObserver();
@@ -49,7 +50,7 @@ Future<void> bootstrap(FutureOr<Widget> Function() builder) async {
     log(details.exceptionAsString(), stackTrace: details.stack);
   };
 
-  // Add cross-flavor configuration here
+  initDependencies();
 
   runApp(
     ProviderScope(

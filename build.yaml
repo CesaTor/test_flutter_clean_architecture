@@ -1,6 +1,4 @@
 # global_options:
-#   freezed:freezed:
+#   riverpod_generator:riverpod_generator:
 #     runs_before:
-#       - freezed:freezed
-#       - isar_generator:isar_generator
-#       - chopper_generator:chopper_generator
+#       - json_serializable:json_serializable

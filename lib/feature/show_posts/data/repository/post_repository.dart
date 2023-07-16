@@ -1,6 +1,6 @@
-import 'package:fomo/core/resources/data_state.dart';
-import 'package:fomo/feature/show_posts/data/model/post.dart';
+import 'dart:developer';
 import 'package:fomo/feature/show_posts/data/source/remote/post_api_service.dart';
+import 'package:fomo/feature/show_posts/domain/entity/i_post.dart';
 import 'package:fomo/feature/show_posts/domain/repository/i_post_repository.dart';
 
 class PostRepository implements IPostRepository {
@@ -9,32 +9,22 @@ class PostRepository implements IPostRepository {
   final PostApiService _postApiService;
 
   @override
-  Future<DataState<PostModel>> getPost(int id) async {
+  Future<IPost> getPost(int id) async {
     try {
-      final res = await _postApiService.getPost(id);
-
-      if (res.isSuccessful) {
-        return DataSuccess(res.body!);
-      } else {
-        return DataError(ErrorState(res.statusCode, res.error.toString()));
-      }
+      return await _postApiService.getPost(id);
     } catch (e) {
-      return DataError(ErrorState(500, e.toString()));
+      log('getPost', error: e);
+      rethrow;
     }
   }
 
   @override
-  Future<DataState<List<PostModel>>> getPosts() async {
+  Future<List<IPost>> getPosts() async {
     try {
-      final res = await _postApiService.getPosts();
-
-      if (res.isSuccessful) {
-        return DataSuccess(res.body!);
-      } else {
-        return DataError(ErrorState(res.statusCode, res.error.toString()));
-      }
+      return await _postApiService.getPosts();
     } catch (e) {
-      return DataError(ErrorState(500, e.toString()));
+      log('getPostss', error: e);
+      rethrow;
     }
   }
 }

@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:fomo/feature/counter/counter.dart';
+import 'package:fomo/feature/show_posts/presentation/page/show_posts_page.dart';
 import 'package:fomo/l10n/l10n.dart';
 
 class App extends StatelessWidget {
@@ -16,7 +16,7 @@ class App extends StatelessWidget {
       ),
       localizationsDelegates: AppLocalizations.localizationsDelegates,
       supportedLocales: AppLocalizations.supportedLocales,
-      home: const CounterPage(),
+      home: const ShowPostsPage(),
     );
   }
 }

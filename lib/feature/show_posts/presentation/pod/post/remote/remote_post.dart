@@ -1,15 +1,20 @@
+import 'package:fomo/feature/show_posts/dependencies.dart';
+import 'package:fomo/feature/show_posts/domain/entity/i_post.dart';
+import 'package:fomo/feature/show_posts/domain/usecase/get_post.dart';
+import 'package:fomo/feature/show_posts/domain/usecase/get_posts.dart';
 import 'package:riverpod_annotation/riverpod_annotation.dart';
 
 part 'remote_post.g.dart';
 
 @riverpod
-class RemotePost extends _$RemotePost {
-  // TODO: resolve build sequence
-  // TODO: implement remote call
-  // continue https://www.youtube.com/watch?v=7V_P6dovixg
-  // minute 20:17
-  @override
-  String build() {
-    return '';
-  }
+Future<List<IPost>> getRemotePosts(GetRemotePostsRef ref) {
+  return sl<GetPostsUseCase>()();
+}
+
+@riverpod
+Future<IPost> getRemotePost(
+  GetRemotePostRef ref,
+  int id,
+) {
+  return sl<GetPostUseCase>()(params: id);
 }

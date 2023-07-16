@@ -8,7 +8,7 @@ import 'package:get_it/get_it.dart';
 
 final sl = GetIt.instance;
 
-void initDependencies() {
+void initShowPostsDeps() {
   sl
     // Init HTTP Service
     ..registerSingleton<PostApiService>(
@@ -19,11 +19,11 @@ void initDependencies() {
       PostRepository(sl()),
     )
     // Register UseCase
-    ..registerSingleton<GetPostUseCase>(
-      GetPostUseCase(sl()),
-    )
-    // Register UseCase
     ..registerSingleton<GetPostsUseCase>(
       GetPostsUseCase(sl()),
+    )
+    // Register UseCase
+    ..registerSingleton<GetPostUseCase>(
+      GetPostUseCase(sl()),
     );
 }

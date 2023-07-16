@@ -37,12 +37,6 @@ class AppPodObserver extends ProviderObserver {
     super.didDisposeProvider(provider, container);
     log('onDispose(${provider.name})');
   }
-
-  // @override
-  // void onError(BlocBase<dynamic> bloc, Object error, StackTrace stackTrace) {
-  //   log('onError(${bloc.runtimeType}, $error, $stackTrace)');
-  //   super.onError(bloc, error, stackTrace);
-  // }
 }
 
 Future<void> bootstrap(FutureOr<Widget> Function() builder) async {
@@ -50,7 +44,7 @@ Future<void> bootstrap(FutureOr<Widget> Function() builder) async {
     log(details.exceptionAsString(), stackTrace: details.stack);
   };
 
-  initDependencies();
+  initShowPostsDeps();
 
   runApp(
     ProviderScope(

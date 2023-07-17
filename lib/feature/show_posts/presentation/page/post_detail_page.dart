@@ -1,48 +1,72 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
-import 'package:fomo/feature/show_posts/domain/entity/i_post.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:fomo/feature/show_posts/presentation/pod/post/remote/remote_post.dart';
 
-class PostDetailPage extends StatelessWidget {
-  const PostDetailPage({required this.post, super.key});
+class PostDetailPage extends ConsumerWidget {
+  const PostDetailPage({required this.postId, super.key});
 
-  final IPost post;
+  final int postId;
 
   @override
-  Widget build(BuildContext context) {
-    return SafeArea(
-      child: Scaffold(
-          body: CustomScrollView(
-        slivers: [
-          SliverAppBar(
-            expandedHeight: 200,
-            flexibleSpace: Hero(
-              tag: post.id ?? 'id',
-              child: CachedNetworkImage(
-                fit: BoxFit.cover,
-                imageUrl: post.url ?? 'https://via.placeholder.com/150/951a64',
+  Widget build(BuildContext context, WidgetRef ref) {
+    final provider = ref.watch(getRemotePostProvider(postId));
+
+    return Scaffold(
+      body: provider.when(
+        data: (post) => post.when(
+          success: (post) => CustomScrollView(
+            slivers: [
+              SliverAppBar(
+                expandedHeight: 200,
+                flexibleSpace: Hero(
+                  tag: post.id,
+                  child: CachedNetworkImage(
+                    fit: BoxFit.cover,
+                    imageUrl: post.url,
+                  ),
+                ),
               ),
-            ),
+              SliverToBoxAdapter(
+                child: Padding(
+                  padding: const EdgeInsets.all(8),
+                  child: Text('title: ${post.title}'),
+                ),
+              ),
+              SliverToBoxAdapter(
+                child: Padding(
+                  padding: const EdgeInsets.all(8),
+                  child: Text('id: ${post.id}'),
+                ),
+              ),
+              SliverToBoxAdapter(
+                child: Padding(
+                  padding: const EdgeInsets.all(8),
+                  child: Text('albumId: ${post.albumId}'),
+                ),
+              ),
+            ],
           ),
-          SliverToBoxAdapter(
-            child: Padding(
-              padding: const EdgeInsets.all(8),
-              child: Text('title: ${post.title ?? 'title'}'),
-            ),
+          error: (error) => CustomScrollView(
+            slivers: [
+              SliverAppBar(
+                title: Text(error.message),
+              ),
+            ],
           ),
-          SliverToBoxAdapter(
-            child: Padding(
-              padding: const EdgeInsets.all(8),
-              child: Text('id: ${post.id ?? '0'}'),
+        ),
+        loading: () => const CustomScrollView(
+          slivers: [
+            SliverAppBar(
+              title: Text('Loading...'),
             ),
-          ),
-          SliverToBoxAdapter(
-            child: Padding(
-              padding: const EdgeInsets.all(8),
-              child: Text('albumId: ${post.albumId ?? '0'}'),
-            ),
-          ),
-        ],
-      )),
+            SliverToBoxAdapter(
+              child: Center(child: CircularProgressIndicator()),
+            )
+          ],
+        ),
+        error: (error, stackTrace) => Center(child: Text(error.toString())),
+      ),
     );
   }
 }

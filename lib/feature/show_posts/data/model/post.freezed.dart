@@ -20,11 +20,11 @@ PostModel _$PostModelFromJson(Map<String, dynamic> json) {
 
 /// @nodoc
 mixin _$PostModel {
-  int? get albumId => throw _privateConstructorUsedError;
-  int? get id => throw _privateConstructorUsedError;
-  String? get title => throw _privateConstructorUsedError;
-  String? get url => throw _privateConstructorUsedError;
-  String? get thumbnailUrl => throw _privateConstructorUsedError;
+  int get albumId => throw _privateConstructorUsedError;
+  int get id => throw _privateConstructorUsedError;
+  String get title => throw _privateConstructorUsedError;
+  String get url => throw _privateConstructorUsedError;
+  String get thumbnailUrl => throw _privateConstructorUsedError;
 
   Map<String, dynamic> toJson() => throw _privateConstructorUsedError;
   @JsonKey(ignore: true)
@@ -38,11 +38,7 @@ abstract class $PostModelCopyWith<$Res> {
       _$PostModelCopyWithImpl<$Res, PostModel>;
   @useResult
   $Res call(
-      {int? albumId,
-      int? id,
-      String? title,
-      String? url,
-      String? thumbnailUrl});
+      {int albumId, int id, String title, String url, String thumbnailUrl});
 }
 
 /// @nodoc
@@ -58,33 +54,33 @@ class _$PostModelCopyWithImpl<$Res, $Val extends PostModel>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? albumId = freezed,
-    Object? id = freezed,
-    Object? title = freezed,
-    Object? url = freezed,
-    Object? thumbnailUrl = freezed,
+    Object? albumId = null,
+    Object? id = null,
+    Object? title = null,
+    Object? url = null,
+    Object? thumbnailUrl = null,
   }) {
     return _then(_value.copyWith(
-      albumId: freezed == albumId
+      albumId: null == albumId
           ? _value.albumId
           : albumId // ignore: cast_nullable_to_non_nullable
-              as int?,
-      id: freezed == id
+              as int,
+      id: null == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
-              as int?,
-      title: freezed == title
+              as int,
+      title: null == title
           ? _value.title
           : title // ignore: cast_nullable_to_non_nullable
-              as String?,
-      url: freezed == url
+              as String,
+      url: null == url
           ? _value.url
           : url // ignore: cast_nullable_to_non_nullable
-              as String?,
-      thumbnailUrl: freezed == thumbnailUrl
+              as String,
+      thumbnailUrl: null == thumbnailUrl
           ? _value.thumbnailUrl
           : thumbnailUrl // ignore: cast_nullable_to_non_nullable
-              as String?,
+              as String,
     ) as $Val);
   }
 }
@@ -96,11 +92,7 @@ abstract class _$$_PostCopyWith<$Res> implements $PostModelCopyWith<$Res> {
   @override
   @useResult
   $Res call(
-      {int? albumId,
-      int? id,
-      String? title,
-      String? url,
-      String? thumbnailUrl});
+      {int albumId, int id, String title, String url, String thumbnailUrl});
 }
 
 /// @nodoc
@@ -112,33 +104,33 @@ class __$$_PostCopyWithImpl<$Res> extends _$PostModelCopyWithImpl<$Res, _$_Post>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? albumId = freezed,
-    Object? id = freezed,
-    Object? title = freezed,
-    Object? url = freezed,
-    Object? thumbnailUrl = freezed,
+    Object? albumId = null,
+    Object? id = null,
+    Object? title = null,
+    Object? url = null,
+    Object? thumbnailUrl = null,
   }) {
     return _then(_$_Post(
-      albumId: freezed == albumId
+      albumId: null == albumId
           ? _value.albumId
           : albumId // ignore: cast_nullable_to_non_nullable
-              as int?,
-      id: freezed == id
+              as int,
+      id: null == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
-              as int?,
-      title: freezed == title
+              as int,
+      title: null == title
           ? _value.title
           : title // ignore: cast_nullable_to_non_nullable
-              as String?,
-      url: freezed == url
+              as String,
+      url: null == url
           ? _value.url
           : url // ignore: cast_nullable_to_non_nullable
-              as String?,
-      thumbnailUrl: freezed == thumbnailUrl
+              as String,
+      thumbnailUrl: null == thumbnailUrl
           ? _value.thumbnailUrl
           : thumbnailUrl // ignore: cast_nullable_to_non_nullable
-              as String?,
+              as String,
     ));
   }
 }
@@ -146,20 +138,25 @@ class __$$_PostCopyWithImpl<$Res> extends _$PostModelCopyWithImpl<$Res, _$_Post>
 /// @nodoc
 @JsonSerializable()
 class _$_Post implements _Post {
-  _$_Post({this.albumId, this.id, this.title, this.url, this.thumbnailUrl});
+  _$_Post(
+      {required this.albumId,
+      required this.id,
+      required this.title,
+      required this.url,
+      required this.thumbnailUrl});
 
   factory _$_Post.fromJson(Map<String, dynamic> json) => _$$_PostFromJson(json);
 
   @override
-  final int? albumId;
+  final int albumId;
   @override
-  final int? id;
+  final int id;
   @override
-  final String? title;
+  final String title;
   @override
-  final String? url;
+  final String url;
   @override
-  final String? thumbnailUrl;
+  final String thumbnailUrl;
 
   @override
   String toString() {
@@ -200,24 +197,24 @@ class _$_Post implements _Post {
 
 abstract class _Post implements PostModel {
   factory _Post(
-      {final int? albumId,
-      final int? id,
-      final String? title,
-      final String? url,
-      final String? thumbnailUrl}) = _$_Post;
+      {required final int albumId,
+      required final int id,
+      required final String title,
+      required final String url,
+      required final String thumbnailUrl}) = _$_Post;
 
   factory _Post.fromJson(Map<String, dynamic> json) = _$_Post.fromJson;
 
   @override
-  int? get albumId;
+  int get albumId;
   @override
-  int? get id;
+  int get id;
   @override
-  String? get title;
+  String get title;
   @override
-  String? get url;
+  String get url;
   @override
-  String? get thumbnailUrl;
+  String get thumbnailUrl;
   @override
   @JsonKey(ignore: true)
   _$$_PostCopyWith<_$_Post> get copyWith => throw _privateConstructorUsedError;

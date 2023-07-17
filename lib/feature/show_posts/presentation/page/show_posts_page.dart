@@ -1,8 +1,8 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:fomo/config/routes/routes.dart';
 import 'package:fomo/feature/show_posts/domain/entity/i_post.dart';
-import 'package:fomo/feature/show_posts/presentation/page/post_detail_page.dart';
 import 'package:fomo/feature/show_posts/presentation/pod/post/remote/remote_post.dart';
 import 'package:fomo/l10n/l10n.dart';
 
@@ -51,27 +51,31 @@ class _Post extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ListTile(
-      onTap: () => Navigator.of(context).push(
-        MaterialPageRoute<PostDetailPage>(
-          builder: (context) => PostDetailPage(post: post),
-        ),
-      ),
+      onTap: () => PostDetailRoute(postId: post.id).push<void>(context),
       leading: Hero(
-        tag: post.id ?? 'id',
+        tag: post.id,
         child: SizedBox(
-          width: 50,
-          height: 50,
+          width: 60,
+          height: 60,
           child: CachedNetworkImage(
-            imageUrl:
-                post.thumbnailUrl ?? 'https://via.placeholder.com/150/951a64',
+            imageUrl: post.thumbnailUrl,
+            imageBuilder: (context, imageProvider) => Container(
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(8),
+                image: DecorationImage(
+                  image: imageProvider,
+                  fit: BoxFit.cover,
+                ),
+              ),
+            ),
           ),
         ),
       ),
       title: Text(
-        post.title ?? 'title',
+        post.title,
       ),
       subtitle: Text(
-        post.id?.toString() ?? 'id',
+        post.id.toString(),
       ),
     );
   }

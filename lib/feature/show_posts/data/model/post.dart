@@ -7,11 +7,11 @@ part 'post.g.dart';
 @freezed
 class PostModel extends IPost with _$PostModel {
   factory PostModel({
-    int? albumId,
-    int? id,
-    String? title,
-    String? url,
-    String? thumbnailUrl,
+    required int albumId,
+    required int id,
+    required String title,
+    required String url,
+    required String thumbnailUrl,
   }) = _Post;
 
   factory PostModel.fromJson(Map<String, dynamic> json) =>

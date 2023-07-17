@@ -6,11 +6,12 @@ part of 'remote_post.dart';
 // RiverpodGenerator
 // **************************************************************************
 
-String _$getRemotePostsHash() => r'891736db491f9533051c7a12eedff0a46ae2f226';
+String _$getRemotePostsHash() => r'2ead0e7c10f14f8d00802c039818600a1d4e63f1';
 
 /// See also [getRemotePosts].
 @ProviderFor(getRemotePosts)
-final getRemotePostsProvider = AutoDisposeFutureProvider<List<IPost>>.internal(
+final getRemotePostsProvider =
+    AutoDisposeFutureProvider<DataState<List<IPost>>>.internal(
   getRemotePosts,
   name: r'getRemotePostsProvider',
   debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
@@ -20,8 +21,9 @@ final getRemotePostsProvider = AutoDisposeFutureProvider<List<IPost>>.internal(
   allTransitiveDependencies: null,
 );
 
-typedef GetRemotePostsRef = AutoDisposeFutureProviderRef<List<IPost>>;
-String _$getRemotePostHash() => r'6f3c066ecfdd3ef5ac7c574117eef6c03b7cc4cd';
+typedef GetRemotePostsRef
+    = AutoDisposeFutureProviderRef<DataState<List<IPost>>>;
+String _$getRemotePostHash() => r'641d3c6ddb93b2174171647c3544063244841ddd';
 
 /// Copied from Dart SDK
 class _SystemHash {
@@ -44,14 +46,14 @@ class _SystemHash {
   }
 }
 
-typedef GetRemotePostRef = AutoDisposeFutureProviderRef<IPost>;
+typedef GetRemotePostRef = AutoDisposeFutureProviderRef<DataState<IPost>>;
 
 /// See also [getRemotePost].
 @ProviderFor(getRemotePost)
 const getRemotePostProvider = GetRemotePostFamily();
 
 /// See also [getRemotePost].
-class GetRemotePostFamily extends Family<AsyncValue<IPost>> {
+class GetRemotePostFamily extends Family<AsyncValue<DataState<IPost>>> {
   /// See also [getRemotePost].
   const GetRemotePostFamily();
 
@@ -89,7 +91,8 @@ class GetRemotePostFamily extends Family<AsyncValue<IPost>> {
 }
 
 /// See also [getRemotePost].
-class GetRemotePostProvider extends AutoDisposeFutureProvider<IPost> {
+class GetRemotePostProvider
+    extends AutoDisposeFutureProvider<DataState<IPost>> {
   /// See also [getRemotePost].
   GetRemotePostProvider(
     this.id,

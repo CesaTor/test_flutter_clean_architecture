@@ -27,8 +27,11 @@ class Posts extends ConsumerWidget {
     final posts = ref.watch(getRemotePostsProvider);
 
     return posts.when(
-      data: (data) => ListView.builder(
-        itemBuilder: (context, index) => _Post(post: data[index]),
+      data: (data) => data.when(
+        success: (posts) => ListView.builder(
+          itemBuilder: (context, index) => _Post(post: posts[index]),
+        ),
+        error: (error) => Text(error.message),
       ),
       error: (error, stackTrace) => Text(
         error.toString(),

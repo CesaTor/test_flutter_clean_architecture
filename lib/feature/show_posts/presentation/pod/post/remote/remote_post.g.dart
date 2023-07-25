@@ -6,12 +6,11 @@ part of 'remote_post.dart';
 // RiverpodGenerator
 // **************************************************************************
 
-String _$getRemotePostsHash() => r'2ead0e7c10f14f8d00802c039818600a1d4e63f1';
+String _$getRemotePostsHash() => r'b4c6c804adf547e1f86a50cfa4f8cb8894444595';
 
 /// See also [getRemotePosts].
 @ProviderFor(getRemotePosts)
-final getRemotePostsProvider =
-    AutoDisposeFutureProvider<DataState<List<IPost>>>.internal(
+final getRemotePostsProvider = AutoDisposeFutureProvider<List<IPost>>.internal(
   getRemotePosts,
   name: r'getRemotePostsProvider',
   debugGetCreateSourceHash: const bool.fromEnvironment('dart.vm.product')
@@ -21,9 +20,8 @@ final getRemotePostsProvider =
   allTransitiveDependencies: null,
 );
 
-typedef GetRemotePostsRef
-    = AutoDisposeFutureProviderRef<DataState<List<IPost>>>;
-String _$getRemotePostHash() => r'641d3c6ddb93b2174171647c3544063244841ddd';
+typedef GetRemotePostsRef = AutoDisposeFutureProviderRef<List<IPost>>;
+String _$getRemotePostHash() => r'e8bf560cd98ef9111e9eb8b934bcf3514e973491';
 
 /// Copied from Dart SDK
 class _SystemHash {
@@ -46,14 +44,14 @@ class _SystemHash {
   }
 }
 
-typedef GetRemotePostRef = AutoDisposeFutureProviderRef<DataState<IPost>>;
+typedef GetRemotePostRef = AutoDisposeFutureProviderRef<IPost>;
 
 /// See also [getRemotePost].
 @ProviderFor(getRemotePost)
 const getRemotePostProvider = GetRemotePostFamily();
 
 /// See also [getRemotePost].
-class GetRemotePostFamily extends Family<AsyncValue<DataState<IPost>>> {
+class GetRemotePostFamily extends Family<AsyncValue<IPost>> {
   /// See also [getRemotePost].
   const GetRemotePostFamily();
 
@@ -91,8 +89,7 @@ class GetRemotePostFamily extends Family<AsyncValue<DataState<IPost>>> {
 }
 
 /// See also [getRemotePost].
-class GetRemotePostProvider
-    extends AutoDisposeFutureProvider<DataState<IPost>> {
+class GetRemotePostProvider extends AutoDisposeFutureProvider<IPost> {
   /// See also [getRemotePost].
   GetRemotePostProvider(
     this.id,

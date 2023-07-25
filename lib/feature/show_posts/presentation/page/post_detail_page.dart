@@ -1,32 +1,45 @@
 import 'package:cached_network_image/cached_network_image.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:fomo/feature/show_posts/presentation/pod/post/local/local_post.dart';
 import 'package:fomo/feature/show_posts/presentation/pod/post/remote/remote_post.dart';
 
 class PostDetailPage extends ConsumerWidget {
-  const PostDetailPage({required this.postId, super.key});
+  const PostDetailPage({
+    required this.postId,
+    required this.postUrl,
+    super.key,
+  });
 
   final int postId;
+  final String postUrl;
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    final provider = ref.watch(getRemotePostProvider(postId));
+    final remotePost = ref.watch(getRemotePostProvider(postId));
 
     return Scaffold(
-      body: provider.when(
-        data: (post) => post.when(
-          success: (post) => CustomScrollView(
-            slivers: [
-              SliverAppBar(
-                expandedHeight: 200,
-                flexibleSpace: Hero(
-                  tag: post.id,
-                  child: CachedNetworkImage(
-                    fit: BoxFit.cover,
-                    imageUrl: post.url,
+      body: CustomScrollView(
+        slivers: [
+          SliverAppBar(
+            expandedHeight: 200,
+            flexibleSpace: Hero(
+              tag: postId,
+              child: CachedNetworkImage(
+                fit: BoxFit.cover,
+                imageUrl: postUrl,
+                placeholder: (context, url) => DecoratedBox(
+                  decoration: BoxDecoration(
+                    image: DecorationImage(
+                      image: CachedNetworkImageProvider(postUrl),
+                    ),
                   ),
                 ),
               ),
+            ),
+          ),
+          ...remotePost.when(
+            data: (post) => [
               SliverToBoxAdapter(
                 child: Padding(
                   padding: const EdgeInsets.all(8),
@@ -46,26 +59,28 @@ class PostDetailPage extends ConsumerWidget {
                 ),
               ),
             ],
-          ),
-          error: (error) => CustomScrollView(
-            slivers: [
-              SliverAppBar(
-                title: Text(error.message),
-              ),
+            loading: () => [
+              const SliverToBoxAdapter(
+                child: Center(child: CircularProgressIndicator()),
+              )
+            ],
+            error: (error, stackTrace) => [
+              Center(
+                child: Text(error.toString()),
+              )
             ],
           ),
+        ],
+      ),
+      floatingActionButton: remotePost.when(
+        data: (data) => FloatingActionButton(
+          onPressed: () {
+            ref.read(saveLocalPostProvider(post: data));
+          },
+          child: const Icon(Icons.favorite_border),
         ),
-        loading: () => const CustomScrollView(
-          slivers: [
-            SliverAppBar(
-              title: Text('Loading...'),
-            ),
-            SliverToBoxAdapter(
-              child: Center(child: CircularProgressIndicator()),
-            )
-          ],
-        ),
-        error: (error, stackTrace) => Center(child: Text(error.toString())),
+        error: (error, stackTrace) => null,
+        loading: () => null,
       ),
     );
   }

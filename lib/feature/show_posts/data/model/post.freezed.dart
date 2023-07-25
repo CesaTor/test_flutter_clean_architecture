@@ -20,8 +20,8 @@ PostModel _$PostModelFromJson(Map<String, dynamic> json) {
 
 /// @nodoc
 mixin _$PostModel {
-  int get albumId => throw _privateConstructorUsedError;
   int get id => throw _privateConstructorUsedError;
+  int get albumId => throw _privateConstructorUsedError;
   String get title => throw _privateConstructorUsedError;
   String get url => throw _privateConstructorUsedError;
   String get thumbnailUrl => throw _privateConstructorUsedError;
@@ -38,7 +38,7 @@ abstract class $PostModelCopyWith<$Res> {
       _$PostModelCopyWithImpl<$Res, PostModel>;
   @useResult
   $Res call(
-      {int albumId, int id, String title, String url, String thumbnailUrl});
+      {int id, int albumId, String title, String url, String thumbnailUrl});
 }
 
 /// @nodoc
@@ -54,20 +54,20 @@ class _$PostModelCopyWithImpl<$Res, $Val extends PostModel>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? albumId = null,
     Object? id = null,
+    Object? albumId = null,
     Object? title = null,
     Object? url = null,
     Object? thumbnailUrl = null,
   }) {
     return _then(_value.copyWith(
-      albumId: null == albumId
-          ? _value.albumId
-          : albumId // ignore: cast_nullable_to_non_nullable
-              as int,
       id: null == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
+              as int,
+      albumId: null == albumId
+          ? _value.albumId
+          : albumId // ignore: cast_nullable_to_non_nullable
               as int,
       title: null == title
           ? _value.title
@@ -92,7 +92,7 @@ abstract class _$$_PostCopyWith<$Res> implements $PostModelCopyWith<$Res> {
   @override
   @useResult
   $Res call(
-      {int albumId, int id, String title, String url, String thumbnailUrl});
+      {int id, int albumId, String title, String url, String thumbnailUrl});
 }
 
 /// @nodoc
@@ -104,20 +104,20 @@ class __$$_PostCopyWithImpl<$Res> extends _$PostModelCopyWithImpl<$Res, _$_Post>
   @pragma('vm:prefer-inline')
   @override
   $Res call({
-    Object? albumId = null,
     Object? id = null,
+    Object? albumId = null,
     Object? title = null,
     Object? url = null,
     Object? thumbnailUrl = null,
   }) {
     return _then(_$_Post(
-      albumId: null == albumId
-          ? _value.albumId
-          : albumId // ignore: cast_nullable_to_non_nullable
-              as int,
       id: null == id
           ? _value.id
           : id // ignore: cast_nullable_to_non_nullable
+              as int,
+      albumId: null == albumId
+          ? _value.albumId
+          : albumId // ignore: cast_nullable_to_non_nullable
               as int,
       title: null == title
           ? _value.title
@@ -137,20 +137,21 @@ class __$$_PostCopyWithImpl<$Res> extends _$PostModelCopyWithImpl<$Res, _$_Post>
 
 /// @nodoc
 @JsonSerializable()
-class _$_Post implements _Post {
+class _$_Post extends _Post {
   _$_Post(
-      {required this.albumId,
-      required this.id,
+      {required this.id,
+      required this.albumId,
       required this.title,
       required this.url,
-      required this.thumbnailUrl});
+      required this.thumbnailUrl})
+      : super._();
 
   factory _$_Post.fromJson(Map<String, dynamic> json) => _$$_PostFromJson(json);
 
   @override
-  final int albumId;
-  @override
   final int id;
+  @override
+  final int albumId;
   @override
   final String title;
   @override
@@ -159,17 +160,12 @@ class _$_Post implements _Post {
   final String thumbnailUrl;
 
   @override
-  String toString() {
-    return 'PostModel(albumId: $albumId, id: $id, title: $title, url: $url, thumbnailUrl: $thumbnailUrl)';
-  }
-
-  @override
   bool operator ==(dynamic other) {
     return identical(this, other) ||
         (other.runtimeType == runtimeType &&
             other is _$_Post &&
-            (identical(other.albumId, albumId) || other.albumId == albumId) &&
             (identical(other.id, id) || other.id == id) &&
+            (identical(other.albumId, albumId) || other.albumId == albumId) &&
             (identical(other.title, title) || other.title == title) &&
             (identical(other.url, url) || other.url == url) &&
             (identical(other.thumbnailUrl, thumbnailUrl) ||
@@ -179,7 +175,7 @@ class _$_Post implements _Post {
   @JsonKey(ignore: true)
   @override
   int get hashCode =>
-      Object.hash(runtimeType, albumId, id, title, url, thumbnailUrl);
+      Object.hash(runtimeType, id, albumId, title, url, thumbnailUrl);
 
   @JsonKey(ignore: true)
   @override
@@ -195,20 +191,21 @@ class _$_Post implements _Post {
   }
 }
 
-abstract class _Post implements PostModel {
+abstract class _Post extends PostModel {
   factory _Post(
-      {required final int albumId,
-      required final int id,
+      {required final int id,
+      required final int albumId,
       required final String title,
       required final String url,
       required final String thumbnailUrl}) = _$_Post;
+  _Post._() : super._();
 
   factory _Post.fromJson(Map<String, dynamic> json) = _$_Post.fromJson;
 
   @override
-  int get albumId;
-  @override
   int get id;
+  @override
+  int get albumId;
   @override
   String get title;
   @override

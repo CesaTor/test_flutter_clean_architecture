@@ -6,25 +6,14 @@ import 'package:fomo/feature/show_posts/domain/entity/i_post.dart';
 import 'package:fomo/feature/show_posts/presentation/pod/post/remote/remote_post.dart';
 import 'package:fomo/l10n/l10n.dart';
 
-class ShowPostsPage extends ConsumerWidget {
-  const ShowPostsPage({super.key});
+class ShowSavedPostsPage extends ConsumerWidget {
+  const ShowSavedPostsPage({super.key});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final l10n = context.l10n;
     return Scaffold(
-      appBar: AppBar(
-        title: GestureDetector(
-          onTap: () => ShowSavedPostsRoute().push<void>(context),
-          child: Text(l10n.showPostAppBarTitle + 'aaa'),
-        ),
-        // actions: [
-        //   IconButton(
-        //     onPressed: () => ShowSavedPostsRoute().push<void>(context),
-        //     icon: const Icon(Icons.save),
-        //   ),
-        // ],
-      ),
+      appBar: AppBar(title: Text(l10n.showPostAppBarTitle)),
       body: const Center(child: Posts()),
     );
   }

@@ -1,8 +1,8 @@
 import 'dart:async';
-import 'dart:developer';
 
 import 'package:flutter/widgets.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:fomo/core/util/logger.dart';
 import 'package:fomo/feature/show_posts/dependencies.dart';
 
 class AppPodObserver extends ProviderObserver {
@@ -16,7 +16,7 @@ class AppPodObserver extends ProviderObserver {
     ProviderContainer container,
   ) {
     super.didUpdateProvider(provider, previousValue, newValue, container);
-    log('onChange(${provider.name}, $previousValue, $newValue)');
+    info('onChange(${provider.name}, $previousValue, $newValue)');
   }
 
   @override
@@ -26,7 +26,7 @@ class AppPodObserver extends ProviderObserver {
     ProviderContainer container,
   ) {
     super.didAddProvider(provider, value, container);
-    log('onInit(${provider.name}, $value)');
+    info('onInit(${provider.name}, $value)');
   }
 
   @override
@@ -35,16 +35,18 @@ class AppPodObserver extends ProviderObserver {
     ProviderContainer container,
   ) {
     super.didDisposeProvider(provider, container);
-    log('onDispose(${provider.name})');
+    info('onDispose(${provider.name})');
   }
 }
 
 Future<void> bootstrap(FutureOr<Widget> Function() builder) async {
   FlutterError.onError = (details) {
-    log(details.exceptionAsString(), stackTrace: details.stack);
+    error(details.exceptionAsString(), details.exception, details.stack);
   };
 
-  initShowPostsDeps();
+  WidgetsFlutterBinding.ensureInitialized();
+
+  await initPostsDependencies();
 
   runApp(
     ProviderScope(
